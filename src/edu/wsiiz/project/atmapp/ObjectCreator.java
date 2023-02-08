@@ -14,6 +14,9 @@ public class ObjectCreator {
         if (rs.next()) {
             int id = rs.getInt("id");
             double cash = rs.getDouble("cashInMachine");
+            if (cash < 0) {
+                throw new IllegalArgumentException("The ATM cannot have a negative balance!");
+            }
             query().close();
             return new ATM(id, cash);
         }

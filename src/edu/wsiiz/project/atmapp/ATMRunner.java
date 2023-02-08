@@ -1,6 +1,7 @@
 package edu.wsiiz.project.atmapp;
 
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ATMRunner {
@@ -17,6 +18,18 @@ public class ATMRunner {
         System.out.println("1. EURONET");
         System.out.println("2. PEKAO SA");
         System.out.println("3. MBANK");
+        System.out.println("4. Close ATM");
+    }
+    public static void handleATMSelection(int option) {
+        switch (option) {
+            case 1 -> System.out.println("You've chosen EURONET");
+            case 2 -> System.out.println("You've chosen PEKAO SA");
+            case 3 -> System.out.println("You've chosen MBANK");
+            case 4 -> {
+                System.out.println("Good bye!");
+                System.exit(0);
+            }
+        }
     }
     public static void main(String[] args) {
         // if the user provide pin more than 4 times, should not be able to continue trying to provide a pin
@@ -24,6 +37,7 @@ public class ATMRunner {
         int selection, PIN, counter = 1;
         displayATMSOptions();
         selection = getFromKeyboard().nextInt();
+        handleATMSelection(selection);
         try {
             // creating a query that selects the right ATM for us
             String atmQuery = String.format("SELECT * FROM atms WHERE id = %2d", selection);
@@ -70,8 +84,12 @@ public class ATMRunner {
             }
             // The user gets his card back and the ATM ends his work
             atm.removeCard();
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
+        }
+        // catching all mismatch inputs
+        catch (InputMismatchException e) {
+            System.out.println("Invalid input!");
         }
     }
 }
