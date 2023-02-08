@@ -1,20 +1,20 @@
 package edu.wsiiz.project.atmapp;
 
 public class BankAccount {
+    private final int id;
     private double balance;
-    private String accountNumber;
-    private Customer customer;
-    private double PIN;
+    private final String accountNumber;
+    private final Customer customer;
 
-    public BankAccount(double balance, String accountNumber, Customer customer, double PIN) {
+    public BankAccount(int id, double balance, String accountNumber, Customer customer) {
+        this.id = id;
         this.balance = balance;
         this.accountNumber = accountNumber;
         this.customer = customer;
-        this.PIN = PIN;
     }
 
-    public double getPIN() {
-        return PIN;
+    public int getId() {
+        return id;
     }
 
     public double getBalance() {
@@ -34,6 +34,6 @@ public class BankAccount {
     }
 
     public String getCustomerName() {
-        return customer.getName();
+        return customer.name();
     }
 }

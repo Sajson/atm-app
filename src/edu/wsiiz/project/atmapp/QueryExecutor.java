@@ -1,14 +1,11 @@
 package edu.wsiiz.project.atmapp;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class QueryExecutor {
     private final Connection connection;
 
-    public QueryExecutor() throws SQLException {
+    public QueryExecutor() {
         this.connection = DBConnector.connect();
     }
 
@@ -17,13 +14,11 @@ public class QueryExecutor {
         return statement.executeQuery(query);
     }
 
-    public int executeUpdate(String query) throws SQLException {
+    public void executeUpdate(String query) throws SQLException {
         Statement statement = connection.createStatement();
-        return statement.executeUpdate(query);
+        statement.executeUpdate(query);
     }
-
     public void close() throws SQLException {
         this.connection.close();
     }
-
 }

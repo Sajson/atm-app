@@ -1,42 +1,45 @@
 package edu.wsiiz.project.atmapp;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Menu {
-    private Scanner input;
-    private BankAccount account;
+    private final Scanner input;
+    private final BankAccount account;
 
-    private ATM atm;
+    private final ATM atm;
 
     public Menu(ATM atm) {
         this.input = new Scanner(System.in);
         this.account = atm.getAccount();
         this.atm = atm;
     }
-
-    public void displayOptions() {
-        System.out.println("1. Wypłata");
-        System.out.println("2. Wpłata");
-        System.out.println("3. Sprawdzenie stanu konta");
-        System.out.println("4. Zakończenie");
+    public void welcomeMessage() {
+        System.out.println("Welcome to your account: " + account.getCustomerName() + "!");
     }
 
-    public void handleOption(int option) {
+    public void displayOptions() {
+        System.out.println("1. Withdraw");
+        System.out.println("2. Deposit");
+        System.out.println("3. Checking your account balance");
+        System.out.println("4. Exit");
+    }
+
+    public void handleOption(int option) throws SQLException {
         switch (option) {
             case 1 -> {
-                System.out.print("Podaj kwotę do wypłacenia: ");
+                System.out.print("Specify the amount to withdraw: ");
                 double amount = input.nextDouble();
                 atm.withdrawCash(amount);
-                System.out.println("Succesfully withdrawed: " + amount + "!");
             }
             case 2 -> {
-                System.out.print("Podaj kwotę do wpłacenia: ");
+                System.out.print("Specify the amount to be deposited: ");
                 double amount = input.nextDouble();
                 atm.makeDeposit(amount);
             }
-            case 3 -> System.out.println("Stan konta: " + account.getBalance());
-            case 4 -> System.out.println("Dziękujemy za skorzystanie z usług.");
-            default -> System.out.println("Niepoprawna opcja.");
+            case 3 -> System.out.println("Account balance: " + account.getBalance());
+            case 4 -> System.out.println("Thank you for using the services!");
+            default -> System.out.println("Invalid option.");
         }
     }
 }
