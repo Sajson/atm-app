@@ -3,7 +3,9 @@ package edu.wsiiz.project.atmapp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// class for creating objects for us based on data retrieved from the database
 public class ObjectCreator {
+    // method for query Executing
     public static QueryExecutor query() {
         return new QueryExecutor();
     }
@@ -34,7 +36,6 @@ public class ObjectCreator {
         query().close();
         return null;
     }
-
     public BankAccount createAccount(String q, Customer c) throws SQLException {
         ResultSet rs = query().executeQuery(q);
         if (rs.next()) {

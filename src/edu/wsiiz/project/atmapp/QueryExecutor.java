@@ -1,7 +1,7 @@
 package edu.wsiiz.project.atmapp;
 
 import java.sql.*;
-
+// simple class to execute queries
 public class QueryExecutor {
     private final Connection connection;
 
