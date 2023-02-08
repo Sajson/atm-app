@@ -90,6 +90,8 @@ public class ATMRunner {
         // catching all mismatch inputs
         catch (InputMismatchException e) {
             System.out.println("Invalid input!");
+        } catch (NullPointerException e) {
+            System.out.println("Invalid pointer!");
         }
     }
 }
